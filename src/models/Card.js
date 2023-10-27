@@ -7,9 +7,9 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    // idTk: {
-    //   type: DataTypes.INTEGER,
-    // },
+    idTk: {
+      type: DataTypes.INTEGER,
+    },
     ngayHetHan: {
       type: DataTypes.DATE,
       allowNull: false,
