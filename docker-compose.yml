@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+ mysql:
+   image: mysql
+   container_name: ltud-mysql
+   environment: 
+    - MYSQL_ROOT_PASSWORD=1234
+    - MYSQL_DATABASE=LTUD-Bank
+   ports:
+    - 3306:3306
+ api:
+  build: 
+    context: .
+    dockerfile: Dockerfile
+  container_name: ltud-api
+  env_file:
+    - .env
+  ports:
+   - 4000:4000
+  depends_on:
+    - mysql
+
+
+# networks:
+#   ltud_delivery
+
+
