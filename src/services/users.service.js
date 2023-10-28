@@ -86,11 +86,13 @@ class UsersService {
   async getUserByIdTk(idTk) {
     try {
       const user = await User.findOne({
-        where: { idTk: idTk },
-        include: [ {
-          model: InfoUser,
-          as: 'InfoUser',
-        },],
+        include: [
+          {
+            model: TaiKhoan,
+            where: { idTk: idTk },
+          },
+          // Include thêm các liên kết cần thiết nếu có
+        ],
       });
 
       return user;
