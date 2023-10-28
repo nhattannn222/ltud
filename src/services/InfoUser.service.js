@@ -36,12 +36,12 @@ class InfoUserService {
     try {
       // Lấy thông tin người dùng bằng idInfo
       const user = await usersService.getUserByIdTk(idTk);
-   
+      const infoUser=user.InfoUser;
       if (!user) {
         throw new Error('Không tìm thấy thông tin người dùng');
       }
     
-      return user;
+      return infoUser;
     } catch (error) {
       throw error;
     }
