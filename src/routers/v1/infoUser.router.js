@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllInfoUsers,getInfoUserById,createInfoUser ,updateInfoUser,deleteInfoUser} = require("../../controllers/InfoUser.controller");
+const { getAllInfoUsers,getInfoUserByIdUser,createInfoUser ,updateInfoUser,deleteInfoUser, getInfoUserByIdTk} = require("../../controllers/InfoUser.controller");
 const authorization = require("../../middlewares/authorization");
 const requiredRole = require("../../middlewares/requiredRole");
 
