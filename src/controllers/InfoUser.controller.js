@@ -1,5 +1,5 @@
 const { respone } = require("../helpers/respones");
-const infoUserService = require("../services/infoUser.service");
+const infoUserService = require("../services/InfoUser.service");
 
 const getAllInfoUsers = async (req, res, next) => {
   try {
