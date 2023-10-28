@@ -90,10 +90,11 @@ class UsersService {
           {
             model: TaiKhoan,
             where: { idTk: idTk },
-            include:[  {
-              model: InfoUser,
-              as: 'InfoUser',
-            },]
+            
+          },
+          {
+            model: InfoUser,
+            as: 'InfoUser',
           },
           // Include thêm các liên kết cần thiết nếu có
         ],
