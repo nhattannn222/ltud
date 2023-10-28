@@ -83,6 +83,21 @@ class UsersService {
       throw error;
     }
   }
+  async getUserByIdTk(idTk) {
+    try {
+      const user = await User.findOne({
+        where: { idTk: idTk },
+        include: [ {
+          model: InfoUser,
+          as: 'InfoUser',
+        },],
+      });
+
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 const usersService = new UsersService();

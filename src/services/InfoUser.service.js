@@ -1,6 +1,7 @@
 // InfoUserService.js
 
 const { InfoUser } = require("../models");
+const usersService = require("./users.service");
 
 
 class InfoUserService {
@@ -14,10 +15,12 @@ class InfoUserService {
     }
   }
 
-  async getInfoUserById(idInfo) {
+  async getInfoUserByIdUser(idUser) {
     try {
       // Lấy thông tin người dùng bằng idInfo
-      const infoUser = await InfoUser.findByPk(idInfo);
+      const infoUser = await InfoUser.findOne({
+        idUser
+      });
 
       if (!infoUser) {
         throw new Error('Không tìm thấy thông tin người dùng');
@@ -28,7 +31,21 @@ class InfoUserService {
       throw error;
     }
   }
-
+  
+  async getInfoUserByIdTk(idTk) {
+    try {
+      // Lấy thông tin người dùng bằng idInfo
+      const user = await usersService.getUserByIdTk(idTk);
+      const infoUser=user.InfoUser;
+      if (!user) {
+        throw new Error('Không tìm thấy thông tin người dùng');
+      }
+    
+      return infoUser;
+    } catch (error) {
+      throw error;
+    }
+  }
   async createInfoUser(infoUserData) {
     try {
       // Tạo một bản ghi thông tin người dùng mới

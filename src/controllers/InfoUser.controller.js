@@ -10,10 +10,19 @@ const getAllInfoUsers = async (req, res, next) => {
   }
 };
 
-const getInfoUserById = async (req, res, next) => {
+const getInfoUserByIdUser = async (req, res, next) => {
   try {
     const infoUserId = req.params.id;
     const infoUser = await infoUserService.getInfoUserById(infoUserId);
+    res.status(200).json(respone(infoUser));
+  } catch (e) {
+    next(e);
+  }
+};
+const getInfoUserByIdTk = async (req, res, next) => {
+  try {
+    const idTk = req.params.id;
+    const infoUser = await infoUserService.getInfoUserByIdTk(idTk);
     res.status(200).json(respone(infoUser));
   } catch (e) {
     next(e);
@@ -53,7 +62,7 @@ const deleteInfoUser = async (req, res, next) => {
 
 module.exports = {
   getAllInfoUsers,
-  getInfoUserById,
+  getInfoUserByIdUser,
   createInfoUser,
   updateInfoUser,
   deleteInfoUser,
