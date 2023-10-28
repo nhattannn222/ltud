@@ -63,7 +63,7 @@ class AuthService {
              const dataTk={
               idUser:user.idUser,
               dateCreate:new Date(),
-              maPin:this.generatePasswordFromDOB(birthday),
+              maPin:this.generatePasswordFromDOB(this.formatDate(birthday)),
               tinhTrang:false,
               soDu:100000,
               loaiTK:"tiêu dùng",

@@ -70,7 +70,23 @@ class UsersService {
       throw error;
     }
   }
+  async updatePasswordUser(userId, newPassword) {
+    try {
+      const user = await User.findByPk(userId);
 
+      if (!user) {
+        // Xử lý khi không tìm thấy người dùng
+        // Ví dụ: Trả về lỗi 404 - Không tìm thấy
+        throw new AppError(404,"Không tìm thấy người dùng");
+      }
+      // Cập nhật mật khẩu của người dùng
+      user.password = newPassword;
+      await user.save();
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
   async deleteUser(userId) {
     try {
       const user = await User.findByPk(userId);

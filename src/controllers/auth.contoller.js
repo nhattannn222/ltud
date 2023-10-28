@@ -1,6 +1,7 @@
 const authService = require('../services/auth.service');
 const { AppError } = require('../helpers/error');
 const { respone } = require('../helpers/respones');
+const usersService = require('../services/users.service');
 
 async function login(req, res, next) {
   try {
@@ -32,6 +33,17 @@ try {
   next(error);
 }
 }
+async function changePassword(req,res,next){
+  try{
+    let idUser=res.locals.user.idUser;
+    const {oldPassword,newPassword}=req.body;
+    const isAuth= await authService.login(idUser,oldPassword);
+     const userUpdate=  usersService.updatePasswordUser(idUser,newPassword);
+     res.status(200).json(respone("thanh cong"));
+  }catch(err){
+    next(err);
+  }
+}
 function getProFile(){
   return (req,res,next)=>{
     try{
@@ -43,4 +55,4 @@ function getProFile(){
   }
 }
 
-module.exports = { login,getProFile ,signIn};
+module.exports = { login,getProFile ,signIn,changePassword};
