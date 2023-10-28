@@ -10,6 +10,7 @@ const taiKhoansRouter = require("./TaiKhoan.router");
 const cardRouter = require("./cards.router");
 const bienDongRouter = require("./BienDong.router");
 const chuyenKhoanRouter = require("./ChuyenKhoan.router");
+const infoUserRouter = require("./infoUser.router");
 //path v1: /api/v1
 
 const v1=express.Router();
@@ -19,6 +20,7 @@ v1.use("/taiKhoans",taiKhoansRouter);
 v1.use("/cards",cardRouter);
 v1.use("/bds",bienDongRouter);
 v1.use("/ck",chuyenKhoanRouter);
+v1.use("/info",infoUserRouter);
 //demo
 // v1.get("/profiles",authorization,getProFile())
 //dinh nghia router cho upload
