@@ -23,9 +23,11 @@ const getBienDongsByIdTk  = async (req, res, next) => {
   
   const getBienDongsByIdUser  = async (req, res, next) => {
     try {
+        const idUser = req.params.idUser;
         const user = res.locals.user;
-      // const bienDongs = await bienDongService.getBienDongsByIdUser(user.idUser);
-      res.status(200).json(respone("asdfasdfdsf"));
+        const isAdmin= user.role==="ADMIN";
+        const bienDongs = await bienDongService.getBienDongsByIdUser(user.idUser);
+      res.status(200).json(respone(bienDongs));
     } catch (error) {
       next(error);
     }

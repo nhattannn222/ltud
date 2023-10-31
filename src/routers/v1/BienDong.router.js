@@ -10,6 +10,6 @@ const bienDongRouter = express.Router();
 
 bienDongRouter.get('/', getAllBienDongs);
 bienDongRouter.get('/:idTk',authorization, getBienDongsByIdTk);
-bienDongRouter.get('/user',authorization, getBienDongsByIdUser);
+bienDongRouter.get('/user/:idUser',authorization, getBienDongsByIdUser);
 
 module.exports = bienDongRouter;
