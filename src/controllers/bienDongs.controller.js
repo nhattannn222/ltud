@@ -24,8 +24,8 @@ const getBienDongsByIdTk  = async (req, res, next) => {
   const getBienDongsByIdUser  = async (req, res, next) => {
     try {
         const user = res.locals.user;
-      const bienDongs = await bienDongService.getBienDongsByIdUser(user.idUser);
-      res.status(200).json(respone(bienDongs));
+      // const bienDongs = await bienDongService.getBienDongsByIdUser(user.idUser);
+      res.status(200).json(respone("asdfasdfdsf"));
     } catch (error) {
       next(error);
     }
