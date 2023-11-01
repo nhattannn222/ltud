@@ -49,9 +49,9 @@ class AuthService {
     try {
       // Bắt đầu giao dịch
       const user = await usersService.createUser(userData, { transaction: t });
-      const infoUser = await infoUserService.createInfoUser({...infoUserData,idUser:user.idUser}, { transaction: t });
-      const taiKhoan = await taiKhoanService.createTaiKhoan({...taiKhoanData,idUser:user.idUser}, { transaction: t });
-      const card = await cardService.createCard({...cardData,idTk:taiKhoan.idTk}, { transaction: t });
+      const infoUser = await infoUserService.createInfoUser(infoUserData, { transaction: t });
+      const taiKhoan = await taiKhoanService.createTaiKhoan(taiKhoanData, { transaction: t });
+      const card = await cardService.createCard(cardData, { transaction: t });
   
       // Nếu tất cả các hoạt động thành công, thực hiện commit
       await t.commit();
