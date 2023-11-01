@@ -70,7 +70,6 @@ class AuthService {
         const dataUser={
           password:this.generatePasswordFromDOB(this.formatDate(birthday)),
           phone:phone,
-          role:"user",
           email:email,
         }
         const dataInfo={ name,address,gioitinh,phone,sex,CCCD,email,birthday:this.formatDate(birthday)};
