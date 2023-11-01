@@ -1,4 +1,4 @@
-const { User, InfoUser, Card } = require('../models'); // Import model User
+const { User, InfoUser, Card, sequelize } = require('../models'); // Import model User
 const { AppError } = require('../helpers/error');
 const bcrypt=require("bcrypt");
 const { generateToken } = require('../helpers/jwt');
