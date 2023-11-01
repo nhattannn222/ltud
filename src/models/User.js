@@ -18,6 +18,7 @@ module.exports = (sequelize) => {
       },
     },
     phone: {
+      unique:true,
       type: DataTypes.STRING,
     },
     role: {

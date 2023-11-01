@@ -93,7 +93,6 @@ class UsersService {
       if (!user) {
         throw new Error("Người dùng không tồn tại");
       }
-
       await user.destroy();
     } catch (error) {
       throw error;

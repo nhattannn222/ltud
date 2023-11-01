@@ -7,9 +7,9 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    idUser: {
-      type: DataTypes.INTEGER,
-    },
+    // idUser: {
+    //   type: DataTypes.INTEGER,
+    // },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -32,6 +32,7 @@ module.exports = (sequelize) => {
       },
     },
     phone: {
+      unique:true,
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -47,6 +48,7 @@ module.exports = (sequelize) => {
     },
     CCCD: {
       type: DataTypes.STRING,
+      unique: true,
       validate: {
         is: {
           args: /^[0-9]{12}$/, // CCCD phải có 13 số
@@ -87,5 +89,8 @@ module.exports = (sequelize) => {
     timestamps: false,
   });
 
+  
+
+ 
   return InfoUser;
 };

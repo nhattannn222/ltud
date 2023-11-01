@@ -43,6 +43,26 @@ class AuthService {
       throw error;
     }
   }
+   createFullUser = async (userData, infoUserData, taiKhoanData, cardData) => {
+    const t = await sequelize.transaction();
+  
+    try {
+      // Bắt đầu giao dịch
+      const user = await usersService.createUser(userData, { transaction: t });
+      const infoUser = await infoUserService.createInfoUser({infoUserData}, { transaction: t });
+      const taiKhoan = await taiKhoanService.createTaiKhoan(taiKhoanData, { transaction: t });
+      const card = await cardService.createCard(cardData, { transaction: t });
+  
+      // Nếu tất cả các hoạt động thành công, thực hiện commit
+      await t.commit();
+  
+      return { user, infoUser, taiKhoan, card };
+    } catch (error) {
+      // Nếu có lỗi, thực hiện rollback để hoàn tác các hoạt động trước đó
+      await t.rollback();
+      throw error;
+    }
+  };
   async signIn({ name,address,gioitinh,phone,sex,CCCD,email,birthday}){
       try {
        
@@ -53,50 +73,69 @@ class AuthService {
           role:"user",
           email:email,
         }
-        const user=await usersService.createUser(dataUser);
-        if(user){
-          //tao info
-          const dataInfo={ idUser:user.idUser,name,address,gioitinh,phone,sex,CCCD,email,birthday:this.formatDate(birthday)};
-          const Info=await infoUserService.createInfoUser(dataInfo);
-          if(Info){
-             //tao tk 
-             const dataTk={
-              idUser:user.idUser,
-              dateCreate:new Date(),
-              maPin:this.generatePasswordFromDOB(this.formatDate(birthday)),
-              tinhTrang:false,
-              soDu:100000,
-              loaiTK:"tiêu dùng",
-             }
-             const taiKhoan=await taiKhoanService.createTaiKhoan(dataTk);
-             if(taiKhoan){
-              //tao card
-              const idCard=this.generateRandomID(16)
-              while(!this.isIDCardUnique(idCard)){
-                 idCard=this.generateRandomID(16)
-              }
-              const dataCard={
-                idCard,
-                idTk:taiKhoan.idTk,
-                ngayHetHan:new Date().setFullYear(new Date().getFullYear()+3),
-                loaiCard:"debit",
-              };
-              const card=await cardService.createCard(dataCard);
-              if(card){
-                return {...user.dataValues,password:dataUser.password};
-              }
-             }else{
-              usersService.deleteUser(user.idUser);
-              infoUserService.deleteInfoUser(Info.idInfo);
-              throw new AppError(401,"ko tao dc user!");
-             }
-          }else{
-            usersService.deleteUser(user.idUser);
-            throw new AppError(401,"ko tao dc user!");
-          }
-        }else{
-          throw new AppError(401,"ko tao dc user!");
-        }
+        const dataInfo={ idUser:user.idUser,name,address,gioitinh,phone,sex,CCCD,email,birthday:this.formatDate(birthday)};
+        const dataTk={
+          dateCreate:new Date(),
+          maPin:this.generatePasswordFromDOB(this.formatDate(birthday)),
+          tinhTrang:false,
+          soDu:100000,
+          loaiTK:"tiêu dùng",
+         }
+         const idCard=this.generateRandomID(16)
+         while(!this.isIDCardUnique(idCard)){
+            idCard=this.generateRandomID(16)
+         }
+         const dataCard={
+          idCard,
+          // idTk:taiKhoan.idTk,
+          ngayHetHan:new Date().setFullYear(new Date().getFullYear()+3),
+          loaiCard:"debit",
+        };
+     return  this.createFullUser(dataUser,dataInfo,dataTk,dataCard);
+        // const user=await usersService.createUser(dataUser);
+        // if(user){
+        //   //tao info
+        //   const dataInfo={ idUser:user.idUser,name,address,gioitinh,phone,sex,CCCD,email,birthday:this.formatDate(birthday)};
+        //   const Info=await infoUserService.createInfoUser(dataInfo);
+        //   if(Info){
+        //      //tao tk 
+        //      const dataTk={
+        //       idUser:user.idUser,
+        //       dateCreate:new Date(),
+        //       maPin:this.generatePasswordFromDOB(this.formatDate(birthday)),
+        //       tinhTrang:false,
+        //       soDu:100000,
+        //       loaiTK:"tiêu dùng",
+        //      }
+        //      const taiKhoan=await taiKhoanService.createTaiKhoan(dataTk);
+        //      if(taiKhoan){
+        //       //tao card
+        //       const idCard=this.generateRandomID(16)
+        //       while(!this.isIDCardUnique(idCard)){
+        //          idCard=this.generateRandomID(16)
+        //       }
+        //       const dataCard={
+        //         idCard,
+        //         idTk:taiKhoan.idTk,
+        //         ngayHetHan:new Date().setFullYear(new Date().getFullYear()+3),
+        //         loaiCard:"debit",
+        //       };
+        //       const card=await cardService.createCard(dataCard);
+        //       if(card){
+        //         return {...user.dataValues,password:dataUser.password};
+        //       }
+        //      }else{
+        //       usersService.deleteUser(user.idUser);
+        //       infoUserService.deleteInfoUser(Info.idInfo);
+        //       throw new AppError(401,"ko tao dc user!");
+        //      }
+        //   }else{
+        //     usersService.deleteUser(user.idUser);
+        //     throw new AppError(401,"ko tao dc user!");
+        //   }
+        // }else{
+        //   throw new AppError(401,"ko tao dc user!");
+        // }
     
       } catch (error) {
         
