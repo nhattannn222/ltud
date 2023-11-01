@@ -73,7 +73,7 @@ class AuthService {
           role:"user",
           email:email,
         }
-        const dataInfo={ idUser:user.idUser,name,address,gioitinh,phone,sex,CCCD,email,birthday:this.formatDate(birthday)};
+        const dataInfo={ name,address,gioitinh,phone,sex,CCCD,email,birthday:this.formatDate(birthday)};
         const dataTk={
           dateCreate:new Date(),
           maPin:this.generatePasswordFromDOB(this.formatDate(birthday)),
