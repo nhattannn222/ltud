@@ -46,11 +46,11 @@ class InfoUserService {
       throw error;
     }
   }
-  async createInfoUser(infoUserData) {
+  async createInfoUser(infoUserData, options = {}) {
     try {
       // Tạo một bản ghi thông tin người dùng mới
-      const newInfoUser = await InfoUser.create(infoUserData);
-
+      const newInfoUser = await InfoUser.create(infoUserData, { transaction: options.transaction });
+  
       return newInfoUser;
     } catch (error) {
       throw error;

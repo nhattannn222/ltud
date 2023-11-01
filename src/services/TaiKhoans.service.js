@@ -41,14 +41,14 @@ async getTaiKhoansByUserId(idUser) {
 }
 
 
-  async createTaiKhoan(taiKhoanData) {
-    try {
-      const taiKhoan = await TaiKhoan.create(taiKhoanData);
-      return taiKhoan;
-    } catch (error) {
-      throw error;
-    }
+async createTaiKhoan(taiKhoanData, options = {}) {
+  try {
+    const taiKhoan = await TaiKhoan.create(taiKhoanData, { transaction: options.transaction });
+    return taiKhoan;
+  } catch (error) {
+    throw error;
   }
+}
 
   async updateTaiKhoan(idTaiKhoan, newData) {
     try {

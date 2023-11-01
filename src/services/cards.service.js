@@ -48,14 +48,15 @@ class CardService {
     }
   }
 
-  async createCard(cardData) {
+  async createCard(cardData, options = {}) {
     try {
-      const card = await Card.create(cardData);
+      const card = await Card.create(cardData, { transaction: options.transaction });
       return card;
     } catch (error) {
       throw error;
     }
   }
+  
 
   async updateCard(cardId, newCardData) {
     try {

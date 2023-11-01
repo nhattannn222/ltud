@@ -48,15 +48,14 @@ class UsersService {
   }
   
   
-  async createUser(userData) {
+  async createUser(userData, options = {}) {
     try {
-      const user = await User.create(userData);
+      const user = await User.create(userData, { transaction: options.transaction });
       return user;
     } catch (error) {
       throw error;
     }
   }
-
   async updateUser(userId, newData) {
     try {
       const user = await User.findByPk(userId);
