@@ -10,11 +10,11 @@ const chuyenKhoan=async(req,res,next)=>{
     try {
         let {idTkC,tienGD,idTkN,noiDung}=req.body;
         let tkChuyen=await TaiKhoan.findOne({where:{idTk:idTkC}});
-        if(!tkChuyen ){throw new AppError(201,"khong co tk chuyen")}
+        if(!tkChuyen ){throw new AppError(201,"chọn tài khoản chuyển")}
         let tkNhan=await TaiKhoan.findOne({where:{idTk:idTkN}});
-        if(!tkNhan ){throw new AppError(201,"khong co tk nhan")}
-        if( tkChuyen.soDu*1<tienGD*1){throw new AppError(201,"tk ko du tien de thuc hien giao dich")}
-           
+        if(!tkNhan ){throw new AppError(201,"nhập stk người nhận")}
+        if( tkChuyen.soDu*1<tienGD*1){throw new AppError(201,"số dư không đủ")}
+           if (tienGD*1<0){ throw new AppError(201,"tiền giao dịch không hợp lệ")}
         const tkChuyenAfter= await taiKhoanService.updateTaiKhoan(tkChuyen.idTk,{...tkChuyen,soDu:tkChuyen.soDu*1-tienGD*1});
        
         const tkNhanAfter=await taiKhoanService.updateTaiKhoan(tkNhan.idTk,{...tkNhan,soDu:tkNhan.soDu*1+tienGD*1});
@@ -31,7 +31,7 @@ const chuyenKhoan=async(req,res,next)=>{
           const ck= await BienDong.findOne({where:{idBD:bienDongChuyen.idBD},include:[{model:Bill,as:"Bill"}]})
          res.status(200).json(respone(ck));
     } catch (error) {
-        next(error);
+        next(new AppError(201,"chuyển khoản thất bại"));
     }
 }
 module.exports={
