@@ -22,7 +22,7 @@ const chuyenKhoan=async(req,res,next)=>{
             //ck that bai tra lai tien cho tk chuyen
             await taiKhoanService.updateTaiKhoan(tkNhan.idTk,tkNhan);
         }
-        const bill=await billService.CreateBill({noiDung,tienGD,ngayTaoBill:new Date(),trangThai:true});
+        const bill=await billService.CreateBill({noiDung,tienGD,ngayTaoBill:new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }),trangThai:true});
         
          const bienDongChuyen= await bienDongSerVice.createBienDong({idTk:tkChuyen.idTk,idBill:bill.idBill,soDu:tkChuyenAfter.soDu,loaiBD:0})
          const bienDongNhan= await bienDongSerVice.createBienDong({idTk:tkNhan.idTk,idBill:bill.idBill,soDu:tkNhanAfter.soDu,loaiBD:1})
