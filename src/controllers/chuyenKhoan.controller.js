@@ -32,7 +32,7 @@ const chuyenKhoan=async(req,res,next)=>{
          //thong bao toi thiet bi
          let user=await usersService.getUserByIdTk(idTkN);
          if(user ){
-            throw  new AppError(201,user);
+            throw  new AppError(201,user.fcmToken);
              const tb= await firebaseService.fcmBienDong("chuyen khoan",`biến động:+${bill.tienGD},số dư:${bienDongNhan.soDu},nội dung:${bill.noiDung}`,user.fcmToken);
             //  res.status(200).json(respone(tb));
             
