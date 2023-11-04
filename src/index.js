@@ -3,7 +3,6 @@ const {sequelize}=require("./models")
 const { handelErrors,AppError } = require("./helpers/error");
 const cors = require('cors');
 const app=express();
-
 app.use(express.json());
 app.use(express.static("."));
 app.use(cors( 
