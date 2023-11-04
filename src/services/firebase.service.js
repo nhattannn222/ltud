@@ -20,17 +20,11 @@ async fcmBienDong(title,body,token){
           token,
         };
         
-        admin.messaging().send(message)
-          .then((response) => {
-            console.log('Successfully sent message:', response);
-            res.status(200).json(respone(response));
-          })
-          .catch((error) => {
-            console.log('Error sending message:', error);
-            throw error
-          });
+       const tb= await admin.messaging().send(message);
+       return tb;
+         
       } catch (error) {
-        next(error)
+        throw(error)
       }
 }
 }
