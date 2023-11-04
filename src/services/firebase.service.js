@@ -9,8 +9,8 @@ async fcmBienDong(title,body,token){
     try {
         const message = {
           notification: {
-            title,
-            body,
+            title:title,
+            body:body,
           },
           android: {
             notification: {
@@ -18,7 +18,7 @@ async fcmBienDong(title,body,token){
               color: '#7e55c3'
             }
           },
-          token,
+          token:token,
         };
         
        const tb= await admin.messaging().send(message);
