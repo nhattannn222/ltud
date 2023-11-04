@@ -31,15 +31,11 @@ const chuyenKhoan=async(req,res,next)=>{
          
          //thong bao toi thiet bi
          let user=await usersService.getUserByIdTk(idTkN);
-         if(user ){
-            throw  new AppError(201,user.idUser);
-             const tb= await firebaseService.fcmBienDong("chuyen khoan",`biến động:+${bill.tienGD},số dư:${bienDongNhan.soDu},nội dung:${bill.noiDung}`,user.fcmToken);
-            //  res.status(200).json(respone(tb));
-            
+         if(user && user.tokenFcm!=null){
+             const tb= await firebaseService.fcmBienDong("chuyen khoan",`biến động:+${bill.tienGD},số dư:${bienDongNhan.soDu},nội dung:${bill.noiDung}`,user.tokenFcm);
          }else{
           throw  new AppError(201,"test thong bao loi ")
          }
-          
           const ck= await BienDong.findOne({where:{idBD:bienDongChuyen.idBD},include:[{model:Bill,as:"Bill"}]})
          res.status(200).json(respone(ck));
     } catch (error) {
