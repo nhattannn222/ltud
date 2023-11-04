@@ -14,9 +14,9 @@ async fcmBienDong(title,body,token){
       };
       try {
         const response = await admin.messaging().send(message);
-        console.log('Thông báo đã được gửi:', response);
+        return response;
       } catch (error) {
-        console.error('Gửi thông báo thất bại:', error);
+        throw new AppError(201,error);
       }
 }
 }
