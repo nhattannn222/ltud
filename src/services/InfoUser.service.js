@@ -1,5 +1,6 @@
 // InfoUserService.js
 
+const { AppError } = require("../helpers/error");
 const { InfoUser } = require("../models");
 const usersService = require("./users.service");
 
@@ -38,7 +39,7 @@ class InfoUserService {
       const user = await usersService.getUserByIdTk(idTk);
       
       if (!user) {
-        throw new Error('Không tìm thấy thông tin người dùng');
+        throw new AppError('Không tìm thấy thông tin người dùng');
       }
       const infoUser=user.InfoUser;
       return infoUser.name;
