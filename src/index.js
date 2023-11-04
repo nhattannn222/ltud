@@ -27,7 +27,7 @@ admin.initializeApp({
 });
 
 const { respone } = require("./helpers/respones");
-app.post("/send-notification", async (req, res,next) => {
+app.get("/send-notification", async (req, res,next) => {
  
 try {
 
