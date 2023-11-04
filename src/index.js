@@ -42,9 +42,11 @@ try {
   admin.messaging().send(message)
     .then((response) => {
       console.log('Successfully sent message:', response);
+      res.status(200).json(respone(response));
     })
     .catch((error) => {
       console.log('Error sending message:', error);
+      throw error
     });
 } catch (error) {
   next(error)
