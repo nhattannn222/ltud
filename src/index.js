@@ -21,7 +21,7 @@ app.use("/api/v1",v1);
 
 
 const admin = require('firebase-admin');
-const serviceAccount = require('../ltud-1268c-firebase-adminsdk-nmczk-026bb7c720.json');
+const serviceAccount = require('./ltud-1268c-firebase-adminsdk-nmczk-026bb7c720.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
