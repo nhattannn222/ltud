@@ -1,5 +1,5 @@
 const express = require("express");
-const { getUsers, createUser, updateUser, deleteUser, getUser } = require("../../controllers/users.controller");
+const { getUsers, createUser, updateUser, deleteUser, getUser, setTokenFcm } = require("../../controllers/users.controller");
 const authorization = require("../../middlewares/authorization");
 const requiredRole = require("../../middlewares/requiredRole");
 
@@ -11,7 +11,7 @@ userRouter.get("/", getUsers);
 userRouter.get("/:id",authorization,getUser);
 // Tuyến đường tạo mới người dùng
 userRouter.post("/", createUser);
-
+userRouter.post("/fcm",setTokenFcm );
 // Tuyến đường cập nhật người dùng theo ID
 userRouter.put("/:id", updateUser);
 

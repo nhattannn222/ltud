@@ -40,7 +40,16 @@ const updateUser = async (req, res, next) => {
     next(e);
   }
 };
-
+const setTokenFcm=async(req, res, next) => {
+  const idUser = res.locals.user.idUser;
+  const {token} = req.body;
+  try {
+    const user = await usersService.setTokenFcm(idUser, token);
+    res.status(201).json(respone(user));
+  } catch (e) {
+    next(e);
+  }
+};
 const deleteUser = async (req, res, next) => {
   const userId = req.params.id;
   try {
@@ -57,5 +66,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  getUser
+  getUser,
+  setTokenFcm,
 };

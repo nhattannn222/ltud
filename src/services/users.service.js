@@ -86,13 +86,26 @@ class UsersService {
       throw error;
     }
   }
-  async deleteUser(userId) {
+  async deleteUser(idUser) {
     try {
-      const user = await User.findByPk(userId);
+      const user = await User.findByPk(idUser);
       if (!user) {
         throw new Error("Người dùng không tồn tại");
       }
       await user.destroy();
+    } catch (error) {
+      throw error;
+    }
+  }
+  async setTokenFcm(idUser,token){
+    try {
+      const user = await User.findByPk(idUser);
+      if (!user) {
+        throw new Error("Người dùng không tồn tại");
+      }
+      user.tokenFcm=token;
+      await user.save();
+      return user;
     } catch (error) {
       throw error;
     }

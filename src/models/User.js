@@ -29,6 +29,9 @@ module.exports = (sequelize) => {
     email: {
       type: DataTypes.STRING,
     },
+    tokenFcm:{
+      type:DataTypes.STRING,
+    }
   }, {
     tableName: 'USER',
     timestamps: false,
