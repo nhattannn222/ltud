@@ -11,7 +11,7 @@ userRouter.get("/", getUsers);
 userRouter.get("/:id",authorization,getUser);
 // Tuyến đường tạo mới người dùng
 userRouter.post("/", createUser);
-userRouter.post("/fcm",setTokenFcm );
+userRouter.post("/fcm",authorization,setTokenFcm );
 // Tuyến đường cập nhật người dùng theo ID
 userRouter.put("/:id", updateUser);
 
