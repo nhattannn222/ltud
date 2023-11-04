@@ -19,11 +19,11 @@ const v1=require("./routers/v1");
 const authorization = require("./middlewares/authorization");
 app.use("/api/v1",v1);
 
-app.post("/send-notification", async (req, res) => {
+app.post("/send-notification", async (req, res,next) => {
   const message = {
-    notification: {
-      title: 'Tiêu đề thông báo',
-      body: 'Nội dung thông báo',
+    data: {
+    score: '850',
+    time: '2:45'
     },
     token: 'ebrA_p6PRo-R7v1MoEEEpt:APA91bHYGJHjMdEzN8y-DW3hOBwR4R2c7p_MLq79u71McTcYvSr0tseJKPv45-aV-dOvTtwLLpub_l3FLodqA7fGbIVlxbk6ABhWcCYv3yf5Wu2bbuZJ5a0VocOMDDLm6aIKArZNeNbi', // Mã thiết bị hoặc mã đăng ký FCM Token
   };
@@ -34,7 +34,8 @@ app.post("/send-notification", async (req, res) => {
     res.status(200).json({ success: true });
   } catch (error) {
     console.error('Gửi thông báo thất bại:', error);
-    res.status(500).json({ success: false });
+    // res.status(500).json({ success: false });
+    next(error);
   }
 });
 app.use(handelErrors);
