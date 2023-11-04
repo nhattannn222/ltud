@@ -42,7 +42,7 @@ const chuyenKhoan=async(req,res,next)=>{
           const ck= await BienDong.findOne({where:{idBD:bienDongChuyen.idBD},include:[{model:Bill,as:"Bill"}]})
          res.status(200).json(respone(ck));
     } catch (error) {
-        next(new AppError(201,"chuyển khoản thất bại"));
+        next(error);
     }
 }
 module.exports={
