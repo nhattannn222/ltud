@@ -44,9 +44,10 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 const axios = require('axios');
+const { respone } = require("./helpers/respones");
 app.post("/send-notification", async (req, res,next) => {
  
-const apiUrl = 'https://fcm.googleapis.com/v1/projects/myproject-b5ae1/messages:send';
+const apiUrl = 'https://fcm.googleapis.com/v1/projects/ltud-1268c/messages:send';
 const authToken = `Bearer ${getAccessToken()}`; // Thay thế bằng mã xác thực Firebase của bạn
 
 const requestData = {
@@ -69,9 +70,11 @@ const config = {
 axios.post(apiUrl, requestData, config)
   .then((response) => {
     console.log('API response:', response.data);
+    res.status(200).json(respone(response));
   })
   .catch((error) => {
     console.error('API error:', error);
+    next(error);
   });
 
   
