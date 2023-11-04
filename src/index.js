@@ -32,9 +32,15 @@ app.get("/send-notification", async (req, res,next) => {
 try {
 
   const message = {
-    data: {
-      score: '850',
-      time: '2:45',
+    notification: {
+      title: '`$FooCorp` up 1.43% on the day',
+      body: 'FooCorp gained 11.80 points to close at 835.67, up 1.43% on the day.'
+    },
+    android: {
+      notification: {
+        icon: 'stock_ticker_update',
+        color: '#7e55c3'
+      }
     },
     token: 'ebrA_p6PRo-R7v1MoEEEpt:APA91bHYGJHjMdEzN8y-DW3hOBwR4R2c7p_MLq79u71McTcYvSr0tseJKPv45-aV-dOvTtwLLpub_l3FLodqA7fGbIVlxbk6ABhWcCYv3yf5Wu2bbuZJ5a0VocOMDDLm6aIKArZNeNbi',
   };
