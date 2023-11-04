@@ -3,7 +3,9 @@ const { respone } = require("../helpers/respones");
 const { TaiKhoan, BienDong, Bill } = require("../models");
 const bienDongSerVice = require("../services/BienDongs.service");
 const billService = require("../services/Bill.service");
+const firebaseService = require("../services/firebase.service");
 const taiKhoanService = require("../services/TaiKhoans.service");
+const usersService = require("../services/users.service");
 
 
 const chuyenKhoan=async(req,res,next)=>{
@@ -26,7 +28,12 @@ const chuyenKhoan=async(req,res,next)=>{
         
          const bienDongChuyen= await bienDongSerVice.createBienDong({idTk:tkChuyen.idTk,idBill:bill.idBill,soDu:tkChuyenAfter.soDu,loaiBD:0})
          const bienDongNhan= await bienDongSerVice.createBienDong({idTk:tkNhan.idTk,idBill:bill.idBill,soDu:tkNhanAfter.soDu,loaiBD:1})
-
+         
+         //thong bao toi thiet bi
+         let user=await usersService.getUserByIdTk(idTkN);
+         if(user && user.fcmToken!=null){
+              await firebaseService.fcmBienDong("chuyen khoan",`biến động:+${bill.tienGD},số dư:${bienDongNhan.soDu},nội dung:${bill.noiDung}`);
+         }
           
           const ck= await BienDong.findOne({where:{idBD:bienDongChuyen.idBD},include:[{model:Bill,as:"Bill"}]})
          res.status(200).json(respone(ck));
