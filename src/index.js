@@ -47,7 +47,8 @@ const axios = require('axios');
 const { respone } = require("./helpers/respones");
 app.post("/send-notification", async (req, res,next) => {
  
-const apiUrl = 'https://fcm.googleapis.com/v1/projects/ltud-1268c/messages:send';
+try {
+  const apiUrl = 'https://fcm.googleapis.com/v1/projects/ltud-1268c/messages:send';
 const authToken = `Bearer ${getAccessToken()}`; // Thay thế bằng mã xác thực Firebase của bạn
 
 const requestData = {
@@ -74,8 +75,11 @@ axios.post(apiUrl, requestData, config)
   })
   .catch((error) => {
     console.error('API error:', error);
-    next(error);
+    throw error;
   });
+} catch (error) {
+  next(error)
+}
 
   
 });
