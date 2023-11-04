@@ -35,7 +35,7 @@ const chuyenKhoan=async(req,res,next)=>{
              const tb= await firebaseService.fcmBienDong("chuyen khoan",`biến động:+${bill.tienGD},số dư:${bienDongNhan.soDu},nội dung:${bill.noiDung}`,user.fcmToken);
             //  res.status(200).json(respone(tb));
          }else{
-            new AppError(201,"test thong bao loi ")
+          throw  new AppError(201,"test thong bao loi ")
          }
           
           const ck= await BienDong.findOne({where:{idBD:bienDongChuyen.idBD},include:[{model:Bill,as:"Bill"}]})
