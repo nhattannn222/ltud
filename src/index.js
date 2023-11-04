@@ -36,7 +36,7 @@ try {
       score: '850',
       time: '2:45',
     },
-    token: registrationToken,
+    token: 'ebrA_p6PRo-R7v1MoEEEpt:APA91bHYGJHjMdEzN8y-DW3hOBwR4R2c7p_MLq79u71McTcYvSr0tseJKPv45-aV-dOvTtwLLpub_l3FLodqA7fGbIVlxbk6ABhWcCYv3yf5Wu2bbuZJ5a0VocOMDDLm6aIKArZNeNbi',
   };
   
   admin.messaging().send(message)
