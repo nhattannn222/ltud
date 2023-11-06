@@ -8,8 +8,8 @@ class FirebaseService{
 async fcmBienDong(title,body,token,tkNhan){
     try {
         const message = {
-          data:{
-             "ck":tkNhan
+          data: {
+            tkNhan,
           },
           notification: {
             title:title,
