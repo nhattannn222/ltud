@@ -8,10 +8,14 @@ class FirebaseService{
 async fcmBienDong(title,body,token){
     try {
         const message = {
+          data:{
+            
+          },
           notification: {
             title:title,
             body:body,
           },
+          topic:"ck",
           android: {
             notification: {
               icon: 'stock_ticker_update',
