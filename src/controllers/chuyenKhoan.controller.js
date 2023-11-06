@@ -14,10 +14,10 @@ const chuyenKhoan=async(req,res,next)=>{
         if (idTkC.toString()==idTkN.toString()){
             throw new AppError(201,"Ai đi tự chuyển khoản cho bản thân :))))")
         }
-        if(!tienGD && !parseInt(tienGD)){ throw new AppError(201,"Nhập tiền là số chia hết cho 1000")};
+        if(!tienGD  ||  !parseInt(tienGD)){ throw new AppError(201,"Nhập tiền là số chia hết cho 1000")};
         let tkChuyen=await TaiKhoan.findOne({where:{idTk:idTkC}});
 
-        if(!tkChuyen ){throw new AppError(201,"chọn tài khoản chuyển")}
+        if(!tkChuyen ){throw new AppError(201,"chọn tài khoản chuyển")};
         let tkNhan=await TaiKhoan.findOne({where:{idTk:idTkN}});
         if(!tkNhan ){throw new AppError(201,"nhập stk người nhận")}
         if( tkChuyen.soDu*1<tienGD*1){throw new AppError(201,"số dư không đủ")}
