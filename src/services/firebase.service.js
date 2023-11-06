@@ -5,11 +5,11 @@ admin.initializeApp({
 });
 class FirebaseService{
     
-async fcmBienDong(title,body,token){
+async fcmBienDong(title,body,token,tkNhan){
     try {
         const message = {
           data:{
-            
+             "ck":tkNhan
           },
           notification: {
             title:title,
