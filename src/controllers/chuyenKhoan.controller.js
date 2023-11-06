@@ -11,7 +11,11 @@ const usersService = require("../services/users.service");
 const chuyenKhoan=async(req,res,next)=>{
     try {
         let {idTkC,tienGD,idTkN,noiDung}=req.body;
+        if (idTkC.toString()==idTkN.toString()){
+            throw AppError(201,"Ai đi tự chuyển khoản cho bản thân :))))")
+        }
         let tkChuyen=await TaiKhoan.findOne({where:{idTk:idTkC}});
+
         if(!tkChuyen ){throw new AppError(201,"chọn tài khoản chuyển")}
         let tkNhan=await TaiKhoan.findOne({where:{idTk:idTkN}});
         if(!tkNhan ){throw new AppError(201,"nhập stk người nhận")}
