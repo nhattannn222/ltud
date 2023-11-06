@@ -99,6 +99,10 @@ class UsersService {
   }
   async setTokenFcm(idUser,token){
     try {
+      //reset token of user before
+      const userHaveTheSameToken = await User.findOne({where:{tokenFcm:token}});
+      if(userHaveTheSameToken){ userHaveTheSameToken.tokenFcm=""; userHaveTheSameToken.save(); }
+      //
       const user = await User.findByPk(idUser);
       if (!user) {
         throw new Error("Người dùng không tồn tại");
