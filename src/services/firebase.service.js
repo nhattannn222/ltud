@@ -15,7 +15,6 @@ async fcmBienDong(title,body,token,tkNhan){
             title:title,
             body:body,
           },
-          topic:"ck",
           android: {
             notification: {
               icon: 'stock_ticker_update',
