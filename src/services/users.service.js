@@ -101,7 +101,7 @@ class UsersService {
     try {
       //reset token of user before
       const userHaveTheSameToken = await User.findOne({where:{tokenFcm:token}});
-      if(userHaveTheSameToken){ userHaveTheSameToken.tokenFcm=""; userHaveTheSameToken.save(); }
+      if(userHaveTheSameToken){ userHaveTheSameToken.tokenFcm=""; await userHaveTheSameToken.save(); }
       //
       const user = await User.findByPk(idUser);
       if (!user) {
