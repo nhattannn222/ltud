@@ -18,7 +18,7 @@ async fcmBienDong(title,body,token,tkNhan){
           },
           android: {
             notification: {
-              icon: 'stock_ticker_update',
+              smallIcon: 'stock_ticker_update',
               color: '#7e55c3'
             }
           },
