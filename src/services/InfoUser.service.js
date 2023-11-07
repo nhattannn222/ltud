@@ -58,17 +58,15 @@ class InfoUserService {
     }
   }
 
-  async updateInfoUser(idInfo, updatedInfoUserData) {
+  async updateInfoUser(idUser, updatedInfoUserData) {
     try {
       // Cập nhật thông tin người dùng bằng idInfo
-      const infoUser = await InfoUser.findByPk(idInfo);
+      const infoUser = await InfoUser.findOne({where:{idUser}});
 
       if (!infoUser) {
-        throw new Error('Không tìm thấy thông tin người dùng để cập nhật');
+        throw new AppError('Không tìm thấy thông tin người dùng để cập nhật');
       }
-
       await infoUser.update(updatedInfoUserData);
-
       return infoUser;
     } catch (error) {
       throw error;
