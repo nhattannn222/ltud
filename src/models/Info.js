@@ -32,13 +32,16 @@ module.exports = (sequelize) => {
       },
     },
     phone: {
-      unique:true,
       type: DataTypes.STRING,
       allowNull: false,
+      unique: {
+        args: true,
+        msg: 'Số điện thoại đã tồn tại',
+      },
       validate: {
-        notEmpty: true, // Không được rỗng
+        notEmpty: true,
         is: {
-          args: /^0[0-9]{9}$/, // Điện thoại bắt đầu bằng số 0 và có 10 chữ số
+          args: /^0[0-9]{9}$/,
           msg: 'Số điện thoại không hợp lệ',
         },
       },
