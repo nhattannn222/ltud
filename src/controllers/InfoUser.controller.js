@@ -44,7 +44,7 @@ const updateInfoUser = async (req, res, next) => {
   const updatedInfoUserData = req.body;
   try {
     const infoUser = await infoUserService.updateInfoUser(infoUserId, updatedInfoUserData);
-    res.status(201).json(respone(infoUser));
+    res.status(200).json(respone(infoUser));
   } catch (e) {
     next(e);
   }
@@ -54,7 +54,7 @@ const deleteInfoUser = async (req, res, next) => {
   try {
     const infoUserId = req.params.id;
     await infoUserService.deleteInfoUser(infoUserId);
-    res.status(204).json(true);
+    res.status(200).json(true); 
   } catch (e) {
     next(e);
   }
