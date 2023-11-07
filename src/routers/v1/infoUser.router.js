@@ -15,7 +15,7 @@ infoUserRouter.get("/tk/:id", getInfoUserByIdTk);
 // Tuyến đường tạo mới thông tin người dùng
 infoUserRouter.post("/", createInfoUser);
 // Tuyến đường cập nhật thông tin người dùng theo ID
-infoUserRouter.put("/", authorization,updateInfoUser);
+infoUserRouter.put("/user", authorization,updateInfoUser);
 // Tuyến đường xóa thông tin người dùng theo ID
 infoUserRouter.delete("/:id", deleteInfoUser);
 
