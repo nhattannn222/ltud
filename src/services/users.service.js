@@ -60,7 +60,7 @@ class UsersService {
     try {
       const user = await User.findByPk(userId);
       if (!user) {
-        throw new Error("Người dùng không tồn tại");
+        throw new AppError("Người dùng không tồn tại");
       }
 
       await user.update(newData);

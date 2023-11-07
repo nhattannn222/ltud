@@ -40,7 +40,7 @@ const createInfoUser = async (req, res, next) => {
 };
 
 const updateInfoUser = async (req, res, next) => {
-  const infoUserId = req.params.id;
+  const infoUserId = res.locals.user.idUser;
   const updatedInfoUserData = req.body;
   try {
     const infoUser = await infoUserService.updateInfoUser(infoUserId, updatedInfoUserData);
