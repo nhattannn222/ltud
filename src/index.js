@@ -14,7 +14,7 @@ app.use(cors(
   credentials: true,
   }
 ));
-// sequelize.sync({alter:true});
+sequelize.sync({alter:true});
 const v1=require("./routers/v1");
 const authorization = require("./middlewares/authorization");
 app.use("/api/v1",v1);
