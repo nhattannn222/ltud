@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const { AppError } = require('../helpers/error');
 
 module.exports = (sequelize) => {
   const InfoUser = sequelize.define('InfoUser', {
@@ -7,9 +8,9 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    idUser: {
-      type: DataTypes.INTEGER,
-    },
+    // idUser: {
+    //   type: DataTypes.INTEGER,
+    // },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,13 +25,13 @@ module.exports = (sequelize) => {
         notEmpty: true, // Không được rỗng
       },
     },
-    gioitinh: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      validate: {
-        notEmpty: true, // Không được rỗng
-      },
-    },
+    // gioitinh: {
+    //   type: DataTypes.TINYINT,
+    //   allowNull: false,
+    //   validate: {
+    //     notEmpty: true, // Không được rỗng
+    //   },
+    // },
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -81,7 +82,7 @@ module.exports = (sequelize) => {
             (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())
           ) {
             if (age < 16) {
-              throw new Error('Tuổi phải từ 16 trở lên.');
+              throw new AppError('Tuổi phải từ 16 trở lên.');
             }
           }
         },

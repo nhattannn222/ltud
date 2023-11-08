@@ -10,6 +10,7 @@ module.exports = (sequelize) => {
     noiDung: {
       type: DataTypes.STRING,
     },
+    
     tienGD: {
       type: DataTypes.FLOAT,
       allowNull: false,
