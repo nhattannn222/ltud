@@ -36,7 +36,7 @@ const chuyenKhoan=async(req,res,next)=>{
          
          //thong bao toi thiet bi
          let user=await usersService.getUserByIdTk(idTkN);
-         if(user && !user.tokenFcm){
+         if(user && (user.tokenFcm!=null || user.tokenFcm!="")){
              const tb= await firebaseService.fcmBienDong("biến động",`tk:${tkNhan.idTk}:+${bill.tienGD},số dư:${bienDongNhan.soDu},nội dung:${bill.noiDung},ngày: ${bill.ngayTaoBill}`,user.tokenFcm,tkNhanAfter);
          }
           const ck= await BienDong.findOne({where:{idBD:bienDongChuyen.idBD},include:[{model:Bill,as:"Bill"}]})
