@@ -15,7 +15,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true, // Không được rỗng
+        notEmpty: {
+          msg: 'Tên không được để trống',
+        },
+        isValidName(value) {
+          if (!/^[a-zA-Z ]+$/.test(value)) {
+            throw new AppError('Tên chỉ được chứa chữ cái và khoảng trắng.');
+          }
+        },
       },
     },
     address: {
