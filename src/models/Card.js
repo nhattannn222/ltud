@@ -6,9 +6,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       primaryKey: true,
     },
-    idTk: {
-      type: DataTypes.INTEGER,
-    },
+    // idTk: {
+    //   type: DataTypes.INTEGER,
+    // },
     ngayHetHan: {
       type: DataTypes.DATE,
       allowNull: false,
