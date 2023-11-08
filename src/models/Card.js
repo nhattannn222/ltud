@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     loaiCard: {
-      type: DataTypes.ENUM("master","visa","debit"),
+      type: DataTypes.ENUM("master","visa"),
       allowNull: false,
     },
   }, {

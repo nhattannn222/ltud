@@ -88,7 +88,7 @@ class AuthService {
           idCard,
           // idTk:taiKhoan.idTk,
           ngayHetHan:new Date().setFullYear(new Date().getFullYear()+3),
-          loaiCard:"debit",
+          loaiCard:"visa",
         };
      return  this.createFullUser(dataUser,dataInfo,dataTk,dataCard);
         // const user=await usersService.createUser(dataUser);
