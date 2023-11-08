@@ -6,7 +6,7 @@ class AppError extends Error{
 }
 const handelErrors=(err,req,res,next)=>{
    if(!(err instanceof AppError)){
-     err= new AppError(500,"hệ thống đang bảo trì");
+     err= new AppError(500,err.message);
    }
    const {message,statusCode}=err;
    res.status(statusCode).json({
