@@ -18,10 +18,9 @@ module.exports = (sequelize) => {
         notEmpty: {
           msg: 'Tên không được để trống',
         },
-       
-        isValidName(value) {
-          if (!/^[a-zA-Z ]+$/.test(value)) {
-            throw new AppError('Tên chỉ được chứa chữ cái và khoảng trắng.');
+        isValidVietnameseName(value) {
+          if (!/^[a-zA-Z\s\u00C0-\u024F\u1E00-\u1EFF]+$/.test(value)) {
+            throw new AppError('Tên chỉ được chứa ký tự tiếng Việt có dấu và khoảng trắng.');
           }
         },
       },
