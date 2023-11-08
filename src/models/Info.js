@@ -79,16 +79,22 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: true,
       validate: {
-        isDate: true, // Kiểm tra xem ngày có đúng định dạng ngày tháng không
+        isDate: {
+          msg: 'Ngày sinh không hợp lệ',
+        },
         isOlderThan16(value) {
-          const currentDate = new Date();
-          const birthDate = new Date(value);
-          const age = currentDate.getFullYear() - birthDate.getFullYear();
-          if (
-            currentDate.getMonth() < birthDate.getMonth() ||
-            (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())
-          ) {
-            if (age < 16) {
+          if (value) {
+            const currentDate = new Date();
+            const birthDate = new Date(value);
+            const age = currentDate.getFullYear() - birthDate.getFullYear();
+
+            if (
+              age < 16 ||
+              (age === 16 &&
+                (currentDate.getMonth() < birthDate.getMonth() ||
+                  (currentDate.getMonth() === birthDate.getMonth() &&
+                    currentDate.getDate() < birthDate.getDate())))
+            ) {
               throw new AppError('Tuổi phải từ 16 trở lên.');
             }
           }
@@ -99,7 +105,6 @@ module.exports = (sequelize) => {
     tableName: 'INFOUSER',
     timestamps: false,
   });
-
   
 
  
